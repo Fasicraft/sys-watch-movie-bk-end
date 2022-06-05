@@ -1,0 +1,8 @@
+{
+  "sampleData": {
+    "cd8261ab-5df2-4751-ac20-3c4f41b8485d": {
+      "payload": "sample_data/list_defaultnumbertype.dwl",
+      "vars-mv": "sample_data/defaultstringtype.dwl"
+    }
+  }
+}

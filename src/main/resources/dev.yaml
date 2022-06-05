@@ -1,0 +1,13 @@
+httpListner:
+    hostName: "localhost"
+    port: "8081"
+database:
+    hostName: "db.icraftsoft.net"
+    portNumber: "3306"
+    userName: "mulesoftuser"
+    password: "Cr@fTMule$oFt"
+    name: "mulesoftdb"
+    
+    
+    
+
