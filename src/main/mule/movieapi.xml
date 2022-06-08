@@ -212,6 +212,6 @@ startingTime, endingTime, movieType, postDate, price) values  (:movieTitile, :ci
 
     ]]></db:sql>
 		</db:bulk-insert>
-		<set-payload value='#["New Movie has beedn Added !"]' doc:name="Set Payload" doc:id="e2261464-c2e8-4273-bc38-dfc9090f9ab0" />
+		<set-payload value='#["New Movie has been Added !"]' doc:name="Set Payload" doc:id="e2261464-c2e8-4273-bc38-dfc9090f9ab0" />
     </flow>
 </mule>
