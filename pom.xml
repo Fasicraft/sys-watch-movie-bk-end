@@ -2,19 +2,22 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.mycompany</groupId>
+	<groupId>61e65341-7077-47df-8797-845a4a34b9c0</groupId>
 	<artifactId>sys-watch-movie-bk-end</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<packaging>mule-application</packaging>
 
 	<name>sys-watch-movie-bk-end</name>
 
+	<description/>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
 		<app.runtime>4.4.0-20220221</app.runtime>
 		<mule.maven.plugin.version>3.5.4</mule.maven.plugin.version>
+		<tags/>
+		<categories>[]</categories>
 	</properties>
 
 	<build>
@@ -24,6 +27,32 @@
 				<artifactId>maven-clean-plugin</artifactId>
 				<version>3.0.0</version>
 			</plugin>
+			
+			<plugin>
+					  <groupId>org.mule.tools.maven</groupId>
+					  <artifactId>mule-maven-plugin</artifactId>
+					  <version>3.5.4</version>
+					  <extensions>true</extensions>
+					  <configuration>
+					    <cloudHubDeployment>
+					      <uri>https://anypoint.mulesoft.com</uri>
+					      <muleVersion>4.3.0</muleVersion>
+					      <username>craftsoftwarenebiha@gmail.com</username>
+					      <password>Nebihaamir@123</password>
+					      <applicationName>sys-watch-movies</applicationName>
+					      <environment>Sandbox</environment>
+					      <region>us-east-1</region>
+					      <workers>1</workers>
+					      <workerType>MICRO</workerType>
+					      <properties>
+					       	<env>dev</env>
+					      </properties>
+					      <objectStoreV2>true</objectStoreV2>
+					    </cloudHubDeployment>
+					  </configuration>
+					</plugin>
+			
+			
 			<plugin>
 				<groupId>org.mule.tools.maven</groupId>
 				<artifactId>mule-maven-plugin</artifactId>
