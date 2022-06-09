@@ -3,7 +3,7 @@ pipeline {
          stages {
              stage('Build') {
                  steps {
-                     echo 'Sys Pip Application is in Building Phase'
+                     echo 'Application is in Building Phase'
                      bat 'mvn clean install'
                      }
                  }
