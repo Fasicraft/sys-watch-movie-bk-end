@@ -36,13 +36,13 @@
 					  <configuration>
 					    <cloudHubDeployment>
 					       <uri>https://anypoint.mulesoft.com</uri>
-				            <muleVersion>${muleVersion}</muleVersion>
-				            <username>${username}</username>
-				            <password>${password}</password>
+				            <muleVersion>4.4.0</muleVersion>
+				            <username>CraftbatchSoftware25</username>
+				            <password>Nebihaamir@123</password>
 					      <applicationName>sys-watch-movies</applicationName>
 					      <environment>Sandbox</environment>
-				            <workerType>${workerType}</workerType>
-				            <workers>${workers}</workers>
+				            <workerType>MICRO</workerType>
+				            <workers>1</workers>
 				            <objectStoreV2>true</objectStoreV2>
 					    </cloudHubDeployment>
 					  </configuration>
