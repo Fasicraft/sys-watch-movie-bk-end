@@ -35,21 +35,18 @@
 					  <extensions>true</extensions>
 					  <configuration>
 					    <cloudHubDeployment>
-					      <uri>https://anypoint.mulesoft.com</uri>
-					      <muleVersion>4.3.0</muleVersion>
-					      <username>craftsoftwarenebiha@gmail.com</username>
-					      <password>Nebihaamir@123</password>
+					       <uri>https://anypoint.mulesoft.com</uri>
+				            <muleVersion>${muleVersion}</muleVersion>
+				            <username>${username}</username>
+				            <password>${password}</password>
 					      <applicationName>sys-watch-movies</applicationName>
 					      <environment>Sandbox</environment>
-					      <region>us-east-1</region>
-					      <workers>1</workers>
-					      <workerType>MICRO</workerType>
-					      <properties>
-					       	<env>dev</env>
-					      </properties>
-					      <objectStoreV2>true</objectStoreV2>
+				            <workerType>${workerType}</workerType>
+				            <workers>${workers}</workers>
+				            <objectStoreV2>true</objectStoreV2>
 					    </cloudHubDeployment>
 					  </configuration>
+
 					</plugin>
 			
 			
