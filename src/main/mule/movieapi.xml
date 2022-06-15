@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mule xmlns:api-gateway="http://www.mulesoft.org/schema/mule/api-gateway" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:db="http://www.mulesoft.org/schema/mule/db" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/mule/mule-apikit/current/mule-apikit.xsd http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd 
-http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
-http://www.mulesoft.org/schema/mule/api-gateway http://www.mulesoft.org/schema/mule/api-gateway/current/mule-api-gateway.xsd">
+<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:api-gateway="http://www.mulesoft.org/schema/mule/api-gateway" xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit" xmlns:db="http://www.mulesoft.org/schema/mule/db" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/mule/mule-apikit/current/mule-apikit.xsd http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd  http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd http://www.mulesoft.org/schema/mule/api-gateway http://www.mulesoft.org/schema/mule/api-gateway/current/mule-api-gateway.xsd">
     <http:listener-config name="movieapi-httpListenerConfig">
-        <http:listener-connection host="0.0.0.0" port="${httpListner.port}"/>
+        <http:listener-connection host="0.0.0.0" port="${httpListner.port}" />
     </http:listener-config>
     <apikit:config name="movieapi-config" api="movieapi.raml" outboundHeadersMapName="outboundHeaders" httpStatusVarName="httpStatus" />
-    <db:config name="Database_Config" doc:name="Database Config" doc:id="cb03f6fc-95c2-4635-a09a-6e02fb8af916" >
-		<db:my-sql-connection host="${database.hostName}" port="${database.portNumber}" user="${database.userName}" password="${database.password}" database="${database.name}" />
-	</db:config>
-	<configuration-properties doc:name="Configuration properties" doc:id="f3aab8a8-dc21-4d9a-b5e6-feda601e45af" file="dev.yaml" />
-	<flow name="movieapi-main">
+    <db:config name="Database_Config" doc:name="Database Config" doc:id="cb03f6fc-95c2-4635-a09a-6e02fb8af916">
+        <db:my-sql-connection host="${database.hostName}" port="${database.portNumber}" user="${database.userName}" password="${database.password}" database="${database.name}" />
+    </db:config>
+    <configuration-properties doc:name="Configuration properties" doc:id="f3aab8a8-dc21-4d9a-b5e6-feda601e45af" file="dev.yaml" />
+    <flow name="movieapi-main">
         <http:listener config-ref="movieapi-httpListenerConfig" path="/api/*">
             <http:response statusCode="#[vars.httpStatus default 200]">
                 <http:headers>#[vars.outboundHeaders default {}]</http:headers>
@@ -130,36 +128,33 @@ output application/json
         </error-handler>
     </flow>
     <flow name="get:\movie:movieapi-config">
-        <scatter-gather doc:name="Scatter-Gather" doc:id="98f1d28d-9004-45e9-85ed-19004fbeede9" >
-			<route >
-				<db:select doc:id="3a226aab-a056-464e-86fd-3d178113c23d" config-ref="Database_Config">
-			<db:sql><![CDATA[select * from movies;]]></db:sql>
-		</db:select>
-			</route>
-			<route >
-				<db:select doc:name="Select" doc:id="cce0bfa0-8581-4872-85cf-6c3d3e650be3" config-ref="Database_Config">
-					<db:sql ><![CDATA[select * from bookingData;]]></db:sql>
-				</db:select>
-			</route>
-		</scatter-gather>
-		<ee:transform>
+        <scatter-gather doc:name="Scatter-Gather" doc:id="98f1d28d-9004-45e9-85ed-19004fbeede9">
+            <route>
+                <db:select doc:id="3a226aab-a056-464e-86fd-3d178113c23d" config-ref="Database_Config">
+                    <db:sql><![CDATA[select * from movies;]]></db:sql>
+                </db:select>
+            </route>
+            <route>
+                <db:select doc:name="Select" doc:id="cce0bfa0-8581-4872-85cf-6c3d3e650be3" config-ref="Database_Config">
+                    <db:sql><![CDATA[select * from bookingData;]]></db:sql>
+                </db:select>
+            </route>
+        </scatter-gather>
+        <ee:transform doc:id="09392c15-dbcb-4653-b415-71ed51c5fcf3">
             <ee:message>
                 <ee:set-payload><![CDATA[%dw 2.0
+import * from dw::core::Strings
 output application/json
 
 
-var movieLists = payload."0".payload
-	
+var movieLists = payload."0".payload	
 	
 var bookingData = payload."1".payload
-	
-		
-	
+
 ---
 
-
 movieLists map (movieListsValue) -> {
-	movieTitle:movieListsValue.movieTitile, 
+	movieTitle: capitalize(movieListsValue.movieTitile), 
 	cinimaCode: movieListsValue.movieListsValue, 
 	startingTime: movieListsValue.startingTime, 
 	endingTime: movieListsValue.endingTime, 
@@ -168,26 +163,26 @@ movieLists map (movieListsValue) -> {
 	price: movieListsValue.price,
 		(bookingData map(bookingDataValue) -> {
 			bookDate: bookingDataValue.bookDate,
+			viewType: bookingDataValue.viewType
 
 			
 		}
 		
 		)
 	
-	}
-]]></ee:set-payload>
+	}]]></ee:set-payload>
             </ee:message>
         </ee:transform>
     </flow>
-	<flow name="post:\movie:application\json:movieapi-config">
-		<ee:transform doc:name="Transform Message" doc:id="2eac3ccc-33d1-4785-af25-127abd95d833">
-					<ee:message>
-						<ee:set-payload><![CDATA[%dw 2.0
+    <flow name="post:\movie:application\json:movieapi-config">
+        <ee:transform doc:name="Transform Message" doc:id="2eac3ccc-33d1-4785-af25-127abd95d833">
+            <ee:message>
+                <ee:set-payload><![CDATA[%dw 2.0
 output application/json
 
 ---
 payload filter($.movieType == "Drama" or
-              ($.movieType == "Advancher"))
+              ($.movieType == "Adventure"))
       map ((val, index) ->
 		{
 		movieTitile: val.movieTitile, 
@@ -199,19 +194,15 @@ payload filter($.movieType == "Drama" or
 		price: val.price 
 		
 
-})
-
-]]></ee:set-payload>
-					</ee:message>
-				</ee:transform>
-		<logger level="INFO" doc:name="Logger" doc:id="339dcf07-242b-4ca9-b7ce-503db6aa75e1" message="#[payload]" />
-		<db:bulk-insert doc:name="Bulk insert" doc:id="49aba93b-1687-4a91-b00f-0000efe1d4e3" config-ref="Database_Config">
-			<db:sql><![CDATA[insert into movies (movieTitile, cinimaCode, 
+})]]></ee:set-payload>
+            </ee:message>
+        </ee:transform>
+        <logger level="INFO" doc:name="Logger" doc:id="339dcf07-242b-4ca9-b7ce-503db6aa75e1" message="#[payload]" />
+        <db:bulk-insert doc:name="Bulk insert" doc:id="49aba93b-1687-4a91-b00f-0000efe1d4e3" config-ref="Database_Config">
+            <db:sql><![CDATA[insert into movies (movieTitile, cinimaCode, 
 startingTime, endingTime, movieType, postDate, price) values  (:movieTitile, :cinimaCode, 
-:startingTime, :endingTime, :movieType, :postDate, :price)
-
-    ]]></db:sql>
-		</db:bulk-insert>
-		<set-payload value='#["New Movie has been Added !"]' doc:name="Set Payload" doc:id="e2261464-c2e8-4273-bc38-dfc9090f9ab0" />
+:startingTime, :endingTime, :movieType, :postDate, :price)]]></db:sql>
+        </db:bulk-insert>
+        <set-payload value="#[&quot;New Movie has been Added !&quot;]" doc:name="Set Payload" doc:id="e2261464-c2e8-4273-bc38-dfc9090f9ab0" />
     </flow>
 </mule>
