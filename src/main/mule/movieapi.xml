@@ -8,7 +8,9 @@
         <db:my-sql-connection host="${database.hostName}" port="${database.portNumber}" user="${database.userName}" password="${database.password}" database="${database.name}" />
     </db:config>
     <configuration-properties doc:name="Configuration properties" doc:id="f3aab8a8-dc21-4d9a-b5e6-feda601e45af" file="dev.yaml" />
-    <flow name="movieapi-main">
+    <api-gateway:autodiscovery apiId="17908888" ignoreBasePath="true" doc:name="API Autodiscovery" doc:id="79f9e9e2-b84e-44e4-b366-1f84f1aad6ae" flowRef="post:\movie:application\json:movieapi-config" />
+
+	<flow name="movieapi-main">
         <http:listener config-ref="movieapi-httpListenerConfig" path="/api/*">
             <http:response statusCode="#[vars.httpStatus default 200]">
                 <http:headers>#[vars.outboundHeaders default {}]</http:headers>
