@@ -171,9 +171,11 @@ movieLists map (movieListsValue) -> {
 		
 		)
 	
-	}]]></ee:set-payload>
+	}
+]]></ee:set-payload>
             </ee:message>
         </ee:transform>
+		<logger level="INFO" doc:name="Logger" doc:id="35a27412-cf97-4ea3-9eab-f448220a500e" message="#[payload]"/>
     </flow>
     <flow name="post:\movie:application\json:movieapi-config">
         <ee:transform doc:name="Transform Message" doc:id="2eac3ccc-33d1-4785-af25-127abd95d833">
